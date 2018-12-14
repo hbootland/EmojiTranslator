@@ -11,6 +11,8 @@ import android.support.text.emoji.widget.EmojiButton;
 import android.support.text.emoji.widget.EmojiEditText;
 import android.support.text.emoji.widget.EmojiTextView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Magnifier;
@@ -26,6 +28,7 @@ public class MainTranslation extends AppCompatActivity {
     EmojiTextView textView;
     EmojiConverter emjiTrans;
     private Toolbar toolbar;
+    MenuItem menu;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -104,51 +107,30 @@ public class MainTranslation extends AppCompatActivity {
 
 
     }
-//    @Override
-//    public boolean performClick() {
-//        // Calls the super implementation, which generates an AccessibilityEvent
-//        // and calls the onClick() listener on the view, if any
-//        super.performClick();
-//
-//        // Handle the action for the custom click here
-//
-//        return true;
-//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main_translation, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
 
 
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main_translation, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 

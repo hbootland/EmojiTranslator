@@ -70,12 +70,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorTransparent"
             android:bottomLeftRadius="15dp"
             android:bottomRightRadius="15dp"
             android:topLeftRadius="15dp"
             android:topRightRadius="15dp"
+            android:background="?attr/selectableItemBackground"
             android:drawableTop="@drawable/ic_swap_vert_black_24dp" />
+        <!--android:background="@color/colorTransparent"-->
+
 
 
         <!--Second text box with translated output-->
@@ -86,7 +88,8 @@
             android:layout_width="match_parent"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp"
+            android:gravity="center"/>
 
         <android.support.text.emoji.widget.EmojiTextView
             android:id="@+id/edtTextView"
