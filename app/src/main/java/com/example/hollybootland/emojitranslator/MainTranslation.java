@@ -68,16 +68,6 @@ public class MainTranslation extends AppCompatActivity {
             }
         });
 
-        //FLOATING ACTION BUTTON --- Sets events for this button
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // currenty just outputs some text but can rewrite in future
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
 //        magnifier.show(textView.getWidth() / 2, textView.getHeight() / 2);

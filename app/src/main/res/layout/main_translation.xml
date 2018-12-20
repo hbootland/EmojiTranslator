@@ -3,17 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--tools:context=".MainTranslation"-->
-
-
-    <!--This is the toolbar-->
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:theme="@style/AppTheme">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.hollybootland.emojitranslator.MainTranslation">
 
 
 
@@ -29,80 +20,84 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Emoji Translator"
-            android:gravity = "center_vertical"
-            android:textSize="26dp"
+            android:text="@string/app_name"
+            android:gravity="center_vertical"
+            android:textSize="26sp"
             android:id="@+id/toolbar_title" />
         </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
 
-    <!--This is the floating action button-->
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/fab_margin"
-    />
-    <!--app:srcCompat="@android:drawable/ic_dialog_email"-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_centerVertical="true"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
-        <!--This is the first text box that you write in-->
-        <edu.texttoemoji.EmojiConverter
-            android:id="@+id/edtRawText"
-            android:background="@drawable/edit_text_border"
-            android:gravity="center"
+        <!-- A CardView that contains a TextView -->
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="100dp"
-            android:hint="Translate Text"/>
+            android:layout_height="200dp"
+            card_view:cardCornerRadius="15dp"
+            card_view:cardBackgroundColor="@color/colorAccent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/card_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/white"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
 
 
-
-        <!--Translation button-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:text="Translate"
-            android:layout_gravity="center"/>
+                <edu.texttoemoji.EmojiConverter
+                    android:id="@+id/edtRawText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:textSize="25sp"
+                    android:hint="Enter Text To Start"/>
 
 
-
-        <!--This is to become the switch language button-->
-        <android.support.text.emoji.widget.EmojiButton
-            android:id="@+id/edtButton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:bottomLeftRadius="15dp"
-            android:bottomRightRadius="15dp"
-            android:topLeftRadius="15dp"
-            android:topRightRadius="15dp"
-            android:background="?attr/selectableItemBackground"
-            android:drawableTop="@drawable/ic_swap_vert_black_24dp" />
-        <!--android:background="@color/colorTransparent"-->
-
+                <!--This is to become the switch language button-->
+                <android.support.text.emoji.widget.EmojiButton
+                    android:id="@+id/edtButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:bottomLeftRadius="15dp"
+                    android:bottomRightRadius="15dp"
+                    android:topLeftRadius="15dp"
+                    android:topRightRadius="15dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_compare_arrows_black_24dp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
         <!--Second text box with translated output-->
         <android.support.text.emoji.widget.EmojiEditText
             android:id="@+id/edtText"
             android:focusable="false"
+            android:textSize="25sp"
             android:background="@drawable/edit_text_border"
             android:layout_width="match_parent"
             android:layout_marginRight="20dp"
@@ -115,10 +110,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
-
     </LinearLayout>
-
-
 </RelativeLayout>
 
