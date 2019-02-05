@@ -4,6 +4,8 @@
     <string name="action_input_text">Enter text to translate</string>
     <string name="action_swap_tanslation_lang">Swap Languages</string>
     <string name="language_choice">Choose a Language</string>
+    <string name="translate_button">Translate</string>
+
 
     <string-array name="languages_array">
         <item>Emoji</item>

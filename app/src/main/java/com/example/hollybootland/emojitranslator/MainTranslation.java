@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Magnifier;
 import android.support.v7.widget.Toolbar;
 import android.widget.Spinner;
@@ -26,7 +27,8 @@ import edu.texttoemoji.EmojiConverter;
 public class MainTranslation extends AppCompatActivity {
 
     EmojiEditText editText;
-    EmojiButton button;
+    EmojiButton langSwitchButton;
+    Button translateButton;
     EmojiTextView textView;
     private Toolbar myToolbar, cardToolbar;
     MenuItem menu;
@@ -60,10 +62,11 @@ public class MainTranslation extends AppCompatActivity {
 
         // Access Emoji Views
         editText = findViewById(R.id.edtText);
-        button = findViewById(R.id.edtButton);
+        langSwitchButton = findViewById(R.id.edtButton);
         textView = findViewById(R.id.edtTextView);
 
-
+        // Button for the translation
+        translateButton = findViewById(R.id.translate_button);
 
         // Following 3 lines from:
         // https://github.com/naseemakhtar994/EmojiConverter
@@ -73,14 +76,14 @@ public class MainTranslation extends AppCompatActivity {
         final Magnifier magnifier = new Magnifier(textView);
 
 
-        // TRANSLATION BUTTON EVENT --- Set event for button
-        button.setOnClickListener(new View.OnClickListener() {
+
+        // TRANSLATE BUTTON EVENT --- Set event for button
+        translateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editText.setText(emojiConverter.convertEmoji()); //use this on an event, like a button click
             }
         });
-
 
 
         // CODE TAKEN FROM THE ANDROID DEVELOPER WEBSITE -- BEGIN
@@ -89,9 +92,9 @@ public class MainTranslation extends AppCompatActivity {
         spinner2 = (Spinner)findViewById(R.id.language_spinner2);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.languages_array, android.R.layout.simple_spinner_item);
+                R.array.languages_array, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner2.setAdapter(adapter);
@@ -99,7 +102,21 @@ public class MainTranslation extends AppCompatActivity {
 
 
 
-//        magnifier.show(textView.getWidth() / 2, textView.getHeight() / 2);
+
+
+
+        // LANGUAGE SWITCH BUTTON EVENT --- Set event for button
+        langSwitchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // GET THE CURRENT VALUES IN EACH SPINNER WHEN THE BUTTON IS SELECTED
+                final int spinner1Index = spinner.getSelectedItemPosition();
+                final int spinner2Index = spinner2.getSelectedItemPosition();
+                spinner.setSelection(spinner2Index);
+                spinner2.setSelection(spinner1Index);            }
+        });
+
         // MAGNIFIER FOR TEXT BOX
         textView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
