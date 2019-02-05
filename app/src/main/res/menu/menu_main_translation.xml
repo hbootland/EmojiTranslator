@@ -4,21 +4,28 @@
     tools:context="com.example.hollybootland.emojitranslator.MainTranslation">
 
     <item
+        android:id="@+id/language_spinner1"
+        android:background="#535252"
+        android:title="ActionBar Spinner"
+        app:actionViewClass="android.widget.Spinner"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_history"
         android:icon="@drawable/ic_history_black_24dp"
         android:title="History"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="Favourites"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_settings"
+        android:layout_width="wrap_content"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="always" />
 </menu>

@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Magnifier;
 import android.support.v7.widget.Toolbar;
+import android.widget.Spinner;
 
 import edu.texttoemoji.EmojiConverter;
 
@@ -26,9 +28,9 @@ public class MainTranslation extends AppCompatActivity {
     EmojiEditText editText;
     EmojiButton button;
     EmojiTextView textView;
-    EmojiConverter emjiTrans;
-    private Toolbar toolbar;
+    private Toolbar myToolbar, cardToolbar;
     MenuItem menu;
+    private Spinner spinner, spinner2;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -42,20 +44,31 @@ public class MainTranslation extends AppCompatActivity {
         EmojiCompat.init(config);
         setContentView(R.layout.main_translation);
 
-        // This allows the toolbar to be used for activities
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+
+        // Adding the card view toolbar - set as action bar so I can change stuff on menu
+        cardToolbar = findViewById(R.id.card_menu);
+        setSupportActionBar(cardToolbar);
+//        getSupportActionBar().setTitle("Search");
+
+
+        // Toolbar at the top of the page is defined here
+        myToolbar = findViewById(R.id.toolbar);
+        myToolbar.setNavigationIcon(R.drawable.ic_favorite_black_24dp);
+        // Then define onn action listeners so I can use buttons
+
+
 
         // Access Emoji Views
-        editText = (EmojiEditText) findViewById(R.id.edtText);
-        button = (EmojiButton) findViewById(R.id.edtButton);
-        textView = (EmojiTextView) findViewById(R.id.edtTextView);
+        editText = findViewById(R.id.edtText);
+        button = findViewById(R.id.edtButton);
+        textView = findViewById(R.id.edtTextView);
+
+
 
         // Following 3 lines from:
         // https://github.com/naseemakhtar994/EmojiConverter
         EmojiConverter edt = (EmojiConverter) findViewById(R.id.edtRawText); //Try not adding Textwatcher on this
-        final EmojiConverter emojiConverter=new EmojiConverter(MainTranslation.this);
-        //editText.setText(emojiConverter.convertEmoji()); //use this on an event, like a button click
+        final EmojiConverter emojiConverter = new EmojiConverter(MainTranslation.this);
 
         final Magnifier magnifier = new Magnifier(textView);
 
@@ -67,6 +80,22 @@ public class MainTranslation extends AppCompatActivity {
                 editText.setText(emojiConverter.convertEmoji()); //use this on an event, like a button click
             }
         });
+
+
+
+        // CODE TAKEN FROM THE ANDROID DEVELOPER WEBSITE -- BEGIN
+        // https://developer.android.com/guide/topics/ui/controls/spinner
+        spinner = (Spinner)findViewById(R.id.language_spinner1);
+        spinner2 = (Spinner)findViewById(R.id.language_spinner2);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.languages_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner2.setAdapter(adapter);
+        // END -- CODE TAKEN FROM THE ANDROID DEVELOPER WEBSITE
 
 
 

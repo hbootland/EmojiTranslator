@@ -6,8 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.hollybootland.emojitranslator.MainTranslation">
 
-
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -16,14 +14,13 @@
             android:theme="@style/AppTheme.NoActionBar"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/app_name"
             android:gravity="center_vertical"
-            android:textSize="26sp"
-            android:id="@+id/toolbar_title" />
+            android:textSize="26sp"/>
         </android.support.v7.widget.Toolbar>
 
 
@@ -31,85 +28,116 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="56dp"
         android:orientation="vertical">
 
         <!-- A CardView that contains a TextView -->
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            card_view:cardCornerRadius="15dp"
-            card_view:cardBackgroundColor="@color/colorAccent">
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            card_view:cardCornerRadius="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/card_toolbar"
+                <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/toolbar1"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/white"/>
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimaryDark"
+                    android:minHeight="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <Spinner
+                        android:id="@+id/language_spinner1"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:prompt="@string/language_choice" />
+
+
+                </android.support.v7.widget.Toolbar>
+
+                <!--This is to become the switch language button-->
+                <android.support.text.emoji.widget.EmojiButton
+                    android:id="@+id/edtButton"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_compare_arrows_black_24dp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
-
+                    android:background="@android:color/black" />
 
                 <edu.texttoemoji.EmojiConverter
                     android:id="@+id/edtRawText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:textSize="25sp"
-                    android:hint="Enter Text To Start"/>
+                    android:hint="@string/action_input_text"
+                    android:textSize="25sp" />
 
 
-                <!--This is to become the switch language button-->
-                <android.support.text.emoji.widget.EmojiButton
-                    android:id="@+id/edtButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:bottomLeftRadius="15dp"
-                    android:bottomRightRadius="15dp"
-                    android:topLeftRadius="15dp"
-                    android:topRightRadius="15dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:drawableTop="@drawable/ic_compare_arrows_black_24dp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
 
-        <!--Second text box with translated output-->
-        <android.support.text.emoji.widget.EmojiEditText
-            android:id="@+id/edtText"
-            android:focusable="false"
-            android:textSize="25sp"
-            android:background="@drawable/edit_text_border"
+        <!-- A CardView that contains the translated text -->
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view2"
             android:layout_width="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="100dp"
-            android:gravity="center"/>
+            android:layout_height="150dp"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            card_view:cardCornerRadius="15dp">
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimaryDark"
+                android:minHeight="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <Spinner
+                    android:id="@+id/language_spinner2"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:prompt="@string/language_choice" />
+
+            </android.support.v7.widget.Toolbar>
+
+            <!--Second text box with translated output-->
+            <android.support.text.emoji.widget.EmojiEditText
+                android:id="@+id/edtText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:textSize="25sp" />
+
+
+        </android.support.v7.widget.CardView>
 
         <android.support.text.emoji.widget.EmojiTextView
             android:id="@+id/edtTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
 </RelativeLayout>
 
