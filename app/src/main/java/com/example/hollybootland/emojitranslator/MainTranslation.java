@@ -34,6 +34,16 @@ public class MainTranslation extends AppCompatActivity {
     MenuItem menu;
     private Spinner spinner, spinner2;
 
+    // Function to clear the text in the bottom text box for the next translation
+    public void clearTextBox(String text){
+        if(editText.getText().equals("")){
+            return;
+        }
+        else{
+            editText.setText("");
+        }
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -76,12 +86,20 @@ public class MainTranslation extends AppCompatActivity {
         final Magnifier magnifier = new Magnifier(textView);
 
 
-
         // TRANSLATE BUTTON EVENT --- Set event for button
         translateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editText.setText(emojiConverter.convertEmoji()); //use this on an event, like a button click
+                String spinner1String = spinner.getSelectedItem().toString();
+                String spinner2String = spinner2.getSelectedItem().toString();
+                if(spinner1String.equals("English")&& spinner2String.equals("Emoji")){ // Translating from ENGLISH-EMOJI
+                    clearTextBox(editText.getText().toString());
+                    editText.setText(emojiConverter.convertEmoji()); //use this on an event, like a button click
+                }
+                else if(spinner1String.equals("Emoji") && spinner2String.equals("English")){
+
+                }
+
             }
         });
 
