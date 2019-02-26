@@ -158,7 +158,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:fontFamily="@font/raleway_semibold"
+                    />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
