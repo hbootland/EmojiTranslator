@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hollybootland.emojitranslator.FavouritesActivity">
+
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home_grey_24dp"
+        android:title="@string/home"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom" />
+
+
+    <item
+        android:id="@+id/action_settings"
+        android:layout_width="wrap_content"
+        android:icon="@drawable/ic_settings_grey_24dp"
+        android:orderInCategory="2"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+</menu>

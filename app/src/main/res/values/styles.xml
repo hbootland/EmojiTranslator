@@ -7,15 +7,36 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryLight</item>
 
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="DarkTheme" parent="ThemeOverlay.MaterialComponents.Dark">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <!--<item name="colorAccent">@color/colorPrimaryLight1</item>-->
+
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
+    <style name="MyActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+    </style>
+    <style name="MyActionBarTitleText"
+        parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
     <!--<style name="TranslateButton" parent="Theme.AppCompat">-->
         <!--<item name="colorButtonNormal">@color/colorPrimaryDark</item>-->
         <!--<item name="colorControlHighlight">@color/colorPrimaryLight</item>-->
     <!--</style>-->
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 

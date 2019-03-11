@@ -2,85 +2,107 @@ package com.example.hollybootland.emojitranslator;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.text.emoji.EmojiCompat;
 import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 import android.support.text.emoji.widget.EmojiButton;
 import android.support.text.emoji.widget.EmojiEditText;
 import android.support.text.emoji.widget.EmojiTextView;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Magnifier;
 import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.vdurmont.emoji.EmojiManager;
 import com.vdurmont.emoji.EmojiParser;
 import edu.texttoemoji.EmojiConverter;
-import emoji4j.EmojiUtils;
-//import emoji4j.EmojiUtils;
-
+import java.util.ArrayList;
 
 public class MainTranslation extends AppCompatActivity {
 
-    EmojiEditText editText;
-//    EditText edt;
     EmojiButton langSwitchButton;
-    Button translateButton;
+    Button favouriteButton, translateButton;
+    CheckBox starButton;
     EmojiTextView textView;
-    Toolbar myToolbar, cardToolbar;
+    Toolbar myTopToolbar, cardToolbar;
     MenuItem menu;
     private Spinner spinner, spinner2;
+    private Context mContext;
+    RelativeLayout mRelativeLayout;
+    private RecyclerView rv;
 
-    // Function to clear the text in the bottom text box for the next translation
-    public void clearTextBox(String text){
-        if(text.equals("")){
-            return;
-        }
-        else{
-            editText.setText("");
-        }
-    }
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    final ArrayList<Translations> translationLists = new ArrayList<>();
 
+    private static final String TAG = "MainTranslation";
+    DatabaseHelper mDatabaseHelper;
+
+
+//    public void createNewCard(String inLng, String inTxt, String outLng, String outTxt){
+//        translationLists.add(new Translations(inLng, inTxt, outLng, outTxt));
+//        rv=findViewById(R.id.rv);
+//        rv.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//
+//        if(getCallingActivity()!=null){
+//
+//            adapter = new RVAdapter(mContext, translationLists);
+//            rv.setLayoutManager(layoutManager);
+//            rv.setAdapter(adapter);
+//        }
+//    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        mDatabaseHelper = new DatabaseHelper(this);
         // Init emoji first
         EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
         EmojiCompat.init(config);
         setContentView(R.layout.main_translation);
 
-
         // Adding the card view toolbar - set as action bar so I can change stuff on menu
         cardToolbar = findViewById(R.id.card_menu);
         setSupportActionBar(cardToolbar);
 
+        mRelativeLayout =  findViewById(R.id.rl);
 
         // Toolbar at the top of the page is defined here
-        myToolbar = findViewById(R.id.toolbar);
-        myToolbar.setNavigationIcon(R.drawable.ic_favorite_black_24dp);
+        myTopToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myTopToolbar);
+//        myTopToolbar.setNavigationIcon(R.drawable.ic_favorite_black_24dp);
         // Then define onn action listeners so I can use buttons
 
-
         // Access Emoji Views
-        editText = findViewById(R.id.edtText);
         langSwitchButton = findViewById(R.id.edtButton);
         textView = findViewById(R.id.edtTextView);
 
         // Button for the translation
         translateButton = findViewById(R.id.translate_button);
+
+        // Button for the favourite translations = takes me to anothe rpage
+        favouriteButton = findViewById(R.id.action_favorite);
+
+        // button for adding a new favourite translation
+        starButton = findViewById(R.id.starButton);
 
         // Following 2 lines from:
         // https://github.com/naseemakhtar994/EmojiConverter
@@ -89,6 +111,13 @@ public class MainTranslation extends AppCompatActivity {
 
         final Magnifier magnifier = new Magnifier(textView);
 
+        // setting up recycler view
+        rv=findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        adapter = new RVAdapter(this, translationLists); //KEEP THIS AS "this" OR IT WILL CRASH!!!
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(adapter);
 
         // TRANSLATE BUTTON EVENT --- Set event for button
         translateButton.setOnClickListener(new View.OnClickListener() {
@@ -97,38 +126,63 @@ public class MainTranslation extends AppCompatActivity {
                 String spinner1String = spinner.getSelectedItem().toString();
                 String spinner2String = spinner2.getSelectedItem().toString();
                 String textViewContents = edt.getText().toString();
-                String editTextContents = editText.getText().toString();
+                String trans;
+                String str;
+                int insertIndex = 0;
+                String colon = ":";
 
+//                translations = new ArrayList<>();
 
-                if(spinner1String.equals("English") && spinner2String.equals("Emoji")){ // ENGLISH-EMOJI   WORKING!!
-                    clearTextBox(editTextContents);
+                if (spinner1String.equals("English") && spinner2String.equals("Emoji")) { // ENGLISH-EMOJI   WORKING!!
                     //https://github.com/naseemakhtar994/EmojiConverter
-                    editText.setText(emojiConverter.convertEmoji()); //use this on an event, like a button click
-                }
-                else if(spinner1String.equals("Emoji") && spinner2String.equals("English")){ // EMOJI-ENGLISH  WORKING!!!
-                    clearTextBox(editTextContents);
-                    System.out.println("emoji-english:"+textViewContents+".");
+//                    trans = emojiConverter.convertEmoji(); //use this on an event, like a button click
+//                    System.out.println(trans);
+                    str = colon+textViewContents+colon;
+
+                    trans = EmojiParser.parseToUnicode(str);
+                    if (EmojiManager.isEmoji(trans)){
+                        translationLists.add(insertIndex, new Translations("English", textViewContents, "Emoji", trans));
+                        adapter.notifyItemInserted(insertIndex);
+                    }if (!EmojiManager.isEmoji(trans)){
+                        trans = emojiConverter.convertEmoji();
+                        translationLists.add(insertIndex, new Translations("English", textViewContents, "Emoji", trans));
+                        adapter.notifyItemInserted(insertIndex);
+                    }
+                } else if (spinner1String.equals("Emoji") && spinner2String.equals("English")) { // EMOJI-ENGLISH  WORKING!!!
+//                    System.out.println("emoji-english:"+textViewContents+".");
                     //https://github.com/kcthota/emoji4j
-                   // editText.setText(EmojiUtils.shortCodify(textViewContents));
+                    // editText.setText(EmojiUtils.shortCodify(textViewContents));
                     //https://github.com/vdurmont/emoji-java
-                    editText.setText(EmojiParser.parseToAliases(textViewContents));
-
-                }
-                else if(spinner1String.equals("Unicode") && spinner2String.equals("Emoji")){ // UNICODE-EMOJI     WORKING!!!
-                    clearTextBox(editTextContents);
+                    trans = EmojiParser.parseToAliases(textViewContents);
+                    trans = trans.replace(":", "");
+                    trans = trans.replace("_", " ");
+                    translationLists.add(insertIndex, new Translations("Emoji", textViewContents, "English", trans));
+                    adapter.notifyItemInserted(insertIndex);
+                } else if (spinner1String.equals("Hex") && spinner2String.equals("Emoji")) { // Hex-Emoji     WORKING!!!
                     //https://github.com/vdurmont/emoji-java
-                    editText.setText((EmojiParser.parseToUnicode(textViewContents)));
+                    trans = (EmojiParser.parseToUnicode(textViewContents));
+                    translationLists.add(insertIndex, new Translations("Hex", textViewContents, "Emoji", trans));
+                    adapter.notifyItemInserted(insertIndex);
+                } else if (spinner1String.equals("Emoji") && spinner2String.equals("Hex")) { // Emoji-Hex     WORKING!!!
+                    trans = (EmojiParser.parseToHtmlHexadecimal(textViewContents));
+                    translationLists.add(insertIndex, new Translations("Emoji", textViewContents, "Hex", trans));
+                    adapter.notifyItemInserted(insertIndex);
+                }else if (spinner1String.equals("English") && spinner2String.equals("Hex")) { // ENGLISH-UNICODE     NOT- WORKING!!!
+                    trans = emojiConverter.convertEmoji();
+                    trans = (EmojiParser.parseToHtmlHexadecimal(trans));
+                    translationLists.add(insertIndex, new Translations("English", textViewContents, "Hex", trans));
+                    adapter.notifyItemInserted(insertIndex);
+                }else if (spinner1String.equals("Hex") && spinner2String.equals("English")) { // ENGLISH-UNICODE     NOT- WORKING!!!
+                    trans = (EmojiParser.parseToUnicode(textViewContents));
+                    trans = EmojiParser.parseToAliases(trans);
+                    trans = trans.replace(":", "");
+                    trans = trans.replace("_", " ");
+                    translationLists.add(insertIndex, new Translations("Hex", textViewContents, "English", trans));
+                    adapter.notifyItemInserted(insertIndex);
                 }
-                else if(spinner1String.equals("English") && spinner2String.equals("Unicode")){ // ENGLISH-UNICODE     NOT- WORKING!!!
-                    clearTextBox(editTextContents);
-//                    if(textViewContents == )
-
-                }
-
-
-
             }
         });
+
 
 
         // CODE TAKEN FROM THE ANDROID DEVELOPER WEBSITE -- BEGIN
@@ -143,12 +197,18 @@ public class MainTranslation extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner2.setAdapter(adapter);
-        spinner.setSelection(0,true);
-        spinner2.setSelection(1, true);
+        spinner.setSelection(1,true);
+        spinner2.setSelection(0, true);
         // END -- CODE TAKEN FROM THE ANDROID DEVELOPER WEBSITE
 
 
 
+
+//        starButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+//                String newEntry = Translations.getInLang();
+//            } } );
 
 
 
@@ -191,6 +251,17 @@ public class MainTranslation extends AppCompatActivity {
 
 
     }
+//
+//    public void AddData(String newEntry){
+//        boolean insertData = mDatabaseHelper.addData(newEntry);
+//
+//        if(insertData){
+//            System.out.println("inserted");
+//        }else{
+//            System.out.println("not inserted");
+//        }
+//    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -208,11 +279,16 @@ public class MainTranslation extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(MainTranslation.this, SettingsActivity.class));
             return true;
         }
-
+        if (id == R.id.action_favorite){
+            startActivity(new Intent(MainTranslation.this, FavouritesActivity.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
 }
 
 

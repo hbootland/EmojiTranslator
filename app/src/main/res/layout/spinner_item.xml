@@ -6,4 +6,5 @@
         android:id="@+id/text1"
         android:layout_gravity="start"
         android:textColor="#FFFFFF"
-        android:textSize="20sp" />
+        android:textSize="@dimen/toolbar_size"
+        android:fontFamily="@font/raleway_semibold"/>
