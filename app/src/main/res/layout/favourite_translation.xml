@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/lightGrey"
     tools:context="com.example.hollybootland.emojitranslator.FavouritesActivity">
 
 
@@ -13,8 +13,31 @@
         android:id="@+id/faveToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:theme="@style/AppTheme"/>
+        android:background="?android:colorPrimary"
+        app:titleTextColor="@color/colorWhite"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rv"
+        android:layout_below="@+id/faveToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:alpha="1.0">
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_v"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+
+    </RelativeLayout>
 
     <!--android:text="@string/saved_translation"-->
 

@@ -34,6 +34,7 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:layout_weight="0.5"
+                    android:textColor="@color/colorBlack"
                     android:text="test" />
 
                 <TextView
@@ -42,8 +43,9 @@
                     android:layout_marginStart="50dp"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:textSize="25sp"
+                    android:textSize="27sp"
                     android:layout_weight="1"
+                    android:textColor="@color/colorBlack"
                     android:text="test"/>
 
 
@@ -62,7 +64,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@+id/starButton"
-                android:background="@color/colorPrimaryDark" />
+                android:background="?android:colorPrimaryDark" />
 
             <CheckBox
 
@@ -103,7 +105,9 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:layout_weight="0.5"
-                    android:text="test" />
+                    android:text="test"
+                    android:textColor="@color/colorBlack"
+                    />
 
                 <TextView
                     android:id="@+id/outputText"
@@ -111,9 +115,11 @@
                     android:layout_marginStart="50dp"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:textSize="25sp"
+                    android:textSize="27sp"
                     android:layout_weight="1"
-                    android:text="test"/>
+                    android:text="test"
+                    android:textColor="@color/colorBlack"
+                    />
 
 
             </LinearLayout>

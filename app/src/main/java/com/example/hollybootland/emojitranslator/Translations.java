@@ -5,7 +5,7 @@ class Translations {
     String inText;
     String outLang;
     String outText;
-
+    boolean isChecked;
     Translations(String inLang, String inText, String outLang,
                  String outText){
         this.inLang = inLang;
@@ -30,6 +30,10 @@ class Translations {
         return outText;
     }
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
     public void setInLang(String inLang){
         this.inLang = inLang;
     }
@@ -44,5 +48,9 @@ class Translations {
 
     public void setOutText(String outText) {
         this.outText = outText;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

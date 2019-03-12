@@ -3,4 +3,5 @@
     <dimen name="cardview_toolbar_spacer">32dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="toolbar_size"> 25sp</dimen>
+    <dimen name="title_size"> 50dp</dimen>
 </resources>

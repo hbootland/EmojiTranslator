@@ -8,5 +8,5 @@
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:ellipsize="marquee"
         android:textSize="25sp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:fontFamily="@font/raleway_semibold"/>

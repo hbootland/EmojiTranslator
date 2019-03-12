@@ -8,4 +8,9 @@
     <color name="colorTransparent">#00ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="lightGrey">#d7d7d7</color>
+    <color name="colorGreyprimary">#424242</color>
+    <color name="colorGreyDark">#1b1b1b</color>
+    <color name="colorGreyLight">#6d6d6d</color>
+
+
 </resources>

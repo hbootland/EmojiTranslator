@@ -6,19 +6,27 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryLight</item>
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:titleTextColor">@color/colorWhite</item>
+        <item name="android:colorBackground">@color/lightGrey</item>
+        <item name="android:textColorPrimaryInverse">@color/colorWhite</item>
+        <item name="android:textColorSecondary">@color/colorBlack</item>
+        <item name="android:textColorSecondaryInverse">@color/colorBlack</item>
+    </style>
 
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorGreyprimary</item>
+        <item name="colorPrimaryDark">@color/colorGreyDark</item>
+        <item name="colorAccent">@color/colorGreyLight</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="DarkTheme" parent="ThemeOverlay.MaterialComponents.Dark">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorBlack</item>
-        <item name="colorPrimaryDark">@color/colorBlack</item>
-        <!--<item name="colorAccent">@color/colorPrimaryLight1</item>-->
-
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">true</item>
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">30sp</item>
     </style>
 
     <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
@@ -40,9 +48,25 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="FontSizeSmall">
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="FontSizeMedium">
+        <item name="android:textSize">30sp</item>
+    </style>
+    <style name="FontSizeLarge">
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="AppTheme.Dark.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.Dark.PopupOverlay" parent="ThemeOverlay.AppCompat" />
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
 
 
 </resources>
